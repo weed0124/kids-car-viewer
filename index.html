@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#1a2b4a" />
+  <title>자동차 구경</title>
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" href="icons/icon-192.png" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+  <link rel="stylesheet" href="style.css" />
+  <script type="module" src="vendor/model-viewer.min.js"></script>
+</head>
+<body>
+  <header id="topbar">
+    <button id="btn-list" class="chip" aria-label="차 목록">🚗 목록</button>
+    <h1 id="car-name">불러오는 중…</h1>
+    <button id="btn-rotate" class="chip on" aria-label="빙글빙글">🔄 빙글빙글</button>
+  </header>
+
+  <model-viewer id="viewer"
+    camera-controls
+    auto-rotate
+    auto-rotate-delay="1500"
+    rotation-per-second="25deg"
+    touch-action="none"
+    interaction-prompt="none"
+    shadow-intensity="1"
+    shadow-softness="0.8"
+    exposure="1.1"
+    min-field-of-view="8deg"
+    max-field-of-view="45deg"
+    loading="eager">
+    <div id="load-bar" slot="progress-bar"><div id="load-fill"></div></div>
+  </model-viewer>
+
+  <div id="hint">손가락으로 돌리고, 두 손가락으로 벌리면 커져요!</div>
+
+  <nav id="bottombar">
+    <button id="btn-prev" class="big-btn" aria-label="이전 차">◀</button>
+    <button id="btn-reset" class="chip" aria-label="처음 위치">🎯 제자리</button>
+    <button id="btn-next" class="big-btn" aria-label="다음 차">▶</button>
+  </nav>
+
+  <div id="list-panel" class="hidden">
+    <div id="list-head">
+      <h2>어떤 차를 볼까?</h2>
+      <button id="btn-close" class="chip">✕ 닫기</button>
+    </div>
+    <ul id="car-list"></ul>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

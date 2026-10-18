@@ -1,0 +1,53 @@
+{
+  "cars": [
+    {
+      "id": "wrangler",
+      "name": "지프 랭글러",
+      "emoji": "🛞",
+      "file": "models/wrangler.glb",
+      "note": "2007 Jeep Wrangler Rubicon by Ddiaz Design (Sketchfab, CC BY-NC-SA)"
+    },
+    {
+      "id": "defender",
+      "name": "랜드로버 디펜더",
+      "emoji": "🏕️",
+      "file": "models/defender.glb",
+      "note": "1997 Land Rover Defender 90 (Sketchfab)"
+    },
+    {
+      "id": "gclass",
+      "name": "벤츠 G바겐",
+      "emoji": "⬛",
+      "file": "models/gclass.glb",
+      "note": "2020 Mercedes-Benz G-Class AMG G63 (Sketchfab)"
+    },
+    {
+      "id": "jimny",
+      "name": "스즈키 짐니",
+      "emoji": "🐹",
+      "file": "models/jimny.glb",
+      "note": "2023 Suzuki Jimny Sierra by tonielpro520 (Sketchfab, CC BY)"
+    },
+    {
+      "id": "bronco",
+      "name": "포드 브롱코",
+      "emoji": "🐎",
+      "file": "models/bronco.glb",
+      "note": "2021 Ford Bronco 2-door by Ddiaz Design (Sketchfab, CC BY-NC-SA)"
+    },
+    {
+      "id": "santafe",
+      "name": "현대 싼타페",
+      "emoji": "🏔️",
+      "file": "models/santafe.glb",
+      "note": "2024 Hyundai Santa Fe by Gerda (Sketchfab)"
+    },
+    {
+      "id": "sorento",
+      "name": "기아 쏘렌토",
+      "emoji": "🚙",
+      "file": "models/sorento.glb",
+      "note": "2022 Kia Sorento PHEV by twr422 (Sketchfab, CC BY)"
+    }
+  ]
+}
