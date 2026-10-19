@@ -4,25 +4,29 @@
 차 색깔도 마음대로 바꿀 수 있습니다. 안드로이드 홈 화면에 설치하면 일반 앱처럼 전체화면으로 실행되고,
 한 번 본 차는 오프라인에서도 보입니다.
 
-## 들어있는 차 (15대, 전부 뒤에 보조바퀴 달린 차)
+## 들어있는 차 (11대)
+
+실제 텍스처가 입혀진 고품질 모델만 남겼습니다(대부분 Ddiaz Design 제작). 전부 뒤에 보조바퀴가 달린 차고, 글래디에이터만 짐칸 아래입니다.
 
 | 차 | 출처 (Sketchfab) | 색 바꾸기 |
 |---|---|---|
-| 지프 랭글러 (2007, 2문) | Ddiaz Design, CC BY-NC-SA | ✅ |
-| 지프 랭글러 (2013, 4문 루비콘) | Ddiaz Design, CC BY-NC-SA | ✅ |
+| 지프 랭글러 4문 루비콘 (2013) | Ddiaz Design, CC BY-NC-SA | ✅ |
+| 지프 랭글러 루비콘 392 (2023) | Ddiaz Design, CC BY-NC-SA | ✅ |
+| 지프 랭글러 2문 (2007) | Ddiaz Design, CC BY-NC-SA | ✅ |
+| 지프 글래디에이터 (2020) | Ddiaz Design, CC BY-NC-SA | ✅ |
+| 벤츠 G63 (2025) | Ddiaz Design, CC BY-NC-SA | ✅ |
+| 벤츠 G63 (2020) | Ddiaz Design, CC BY-NC-SA | ✅ |
+| 랜드로버 디펜더 110 픽업 | Ddiaz Design, CC BY | ✅ |
 | 랜드로버 디펜더 90 (1997) | — | ✅ |
-| 랜드로버 디펜더 110 (2021) | David_Holiday, CC BY | ✅ |
-| 벤츠 G63 | — | ✅ |
-| 스즈키 짐니 (2023) | tonielpro520, CC BY | ✅ |
-| 포드 브롱코 (2021) | Ddiaz Design, CC BY-NC-SA | ✅ |
-| 토요타 랜드크루저 FJ40 (1976) | tonielpro520, CC BY | ✅ |
-| 허머 H2 | better_peter, CC BY | ✅ |
-| 미쓰비시 파제로 (1991) | niev, CC BY | ✅ |
-| 토요타 라브4 (2000) | niev, CC BY | ✅ |
-| 현대 갤로퍼 (1994) | teenlin3, CC BY | ❌ (사진 스캔 모델) |
-| 쌍용 코란도 (1997) | teenlin3, CC BY | ❌ (사진 스캔 모델) |
-| 현대 싼타페 (2024) | Gerda | ✅ |
-| 기아 쏘렌토 (2022) | twr422, CC BY | ✅ |
+| 포드 브롱코 2문 (2021) | Ddiaz Design, CC BY-NC-SA | ✅ |
+| 허머 H3 | David_Holiday, CC BY | ✅ |
+| 닛산 패트롤 슈퍼 사파리 | Lambo_SC04, CC BY | ✅ |
+
+뺀 모델(단색 평면 모델이거나 사진 스캔이라 질감이 아쉬운 것)의 원본과 변환 설정은 `~/Downloads/kids-car-model/`과
+`tools/build-models.mjs`에 그대로 있어서, 필요하면 다시 빌드해 넣을 수 있습니다.
+
+조명은 `hdr/studio_small_09.hdr`(Poly Haven, CC0) 스튜디오 환경맵을 써서 도장 반사가 실제처럼 보이게 했습니다.
+`index.html`의 `environment-image`를 `hdr/sky.hdr`로 바꾸면 야외 느낌이 됩니다.
 
 ## 로컬에서 실행
 
@@ -63,7 +67,7 @@ python3 -m http.server 8787
 
 차마다 `paint`에 적힌 재질의 `baseColorFactor`만 바꿉니다(유리·타이어·내장은 그대로).
 고른 색은 차별로 `localStorage`에 저장돼서 다음에 켜도 유지되고, **원래 색** 버튼으로 되돌릴 수 있습니다.
-차체에 텍스처(먼지·무늬)가 입혀진 모델(허머, 새 디펜더)은 변환할 때 텍스처를 밝기만 남긴 흑백으로 바꿔두어서
+차체에 텍스처가 입혀진 모델(허머 H3)은 변환할 때 텍스처를 밝기만 남긴 흑백으로 바꿔두어서
 어떤 색을 곱해도 무늬가 살아 있습니다.
 
 ## 안드로이드(아이 폰/태블릿)에 설치
@@ -98,7 +102,7 @@ icons/                            # 앱 아이콘
 
 ## 모델 변환 스크립트 (tools/)
 
-`tools/build-models.mjs`가 지금 들어있는 15대를 만든 스크립트입니다. 새 차를 넣을 때 `CFG`에 한 줄 추가하고:
+`tools/build-models.mjs`가 지금 들어있는 11대를 만든 스크립트입니다. 새 차를 넣을 때 `CFG`에 한 줄 추가하고:
 
 ```bash
 cd tools && npm install

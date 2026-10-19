@@ -1,4 +1,4 @@
-const CACHE = 'car-viewer-v6';
+const CACHE = 'car-viewer-v8';
 const SHELL = [
   '.',
   'index.html',
@@ -9,6 +9,7 @@ const SHELL = [
   'vendor/model-viewer.min.js',
   'icons/icon-192.png',
   'icons/icon-512.png',
+  'hdr/studio_small_09.hdr',
 ];
 
 self.addEventListener('install', (e) => {

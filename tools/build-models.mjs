@@ -1,10 +1,11 @@
 // 모델 변환 스크립트 — Sketchfab에서 받은 glb/gltf를 앱용 glb로 만든다.
 //   cd tools && npm install
-//   SRC=~/Downloads/kids-car-model OUT=../models node build-models.mjs fj40 hummer ...
+//   SRC=~/Downloads/kids-car-model OUT=../models node build-models.mjs gladiator hummerh3 ...
 // SRC 안의 파일 이름은 아래 CFG의 in: 경로 참고. paint: 색 바꾸기 대상 재질 이름(models.json의 paint와 같게).
 // 텍스처가 입혀진 도장 재질은 밝기만 남긴 흑백 텍스처로 바꾸고 평균색을 baseColorFactor로 옮긴다(색 곱하기용).
 // renormal: 정점이 안 합쳐져 단순화가 안 되는 모델용(법선 버리고 합친 뒤 다시 계산). 'keep'은 법선 유지.
-import { NodeIO, PropertyType } from '@gltf-transform/core';
+// segment: 재질이 하나뿐인 사진 스캔 모델에서 텍스처 색(r,g,b)과 높이(ny 0~1)로 차체 삼각형을 골라 'paint' 재질로 분리.
+import { NodeIO, PropertyType, getBounds } from '@gltf-transform/core';
 import { ALL_EXTENSIONS } from '@gltf-transform/extensions';
 import { dedup, flatten, join, weld, simplify, resample, prune, textureCompress, quantize, instance, sparse, normals } from '@gltf-transform/functions';
 import { MeshoptSimplifier, MeshoptEncoder, MeshoptDecoder } from 'meshoptimizer';
@@ -22,6 +23,16 @@ const CFG = {
   bronco:     { in: `${S}/bronco/scene.gltf`,    paint: ['BRChassis_XZSG1'] },
   santafe:    { in: `${S}/santafe/scene.gltf`,   paint: ['santafek_body'], target: 220000, error: 0.01 },
   sorento:    { in: `${S}/sorento/scene.gltf`,   paint: ['template_carpaint.014'], target: 220000, error: 0.01, renormal: true },
+  // new cars (round 2, higher quality)
+  wrangler23: { in: `${S}/wrangler23.glb`,  paint: ['JMI_1355060001_004'] },
+  gladiator:  { in: `${S}/gladiator.glb`,   paint: [/2019Paint/] },
+  gclass25:   { in: `${S}/gclass25.glb`,    paint: ['MMAT_CarPaint_010'] },
+  defenderpickup: { in: `${S}/defenderpickup.glb`, paint: ['defenderM_CarPaint_Max1'] },
+  hummerh3:   { in: `${S}/hummerh3.glb`,    paint: ['Body'] },
+  bronco4d:   { in: `${S}/bronco4d.glb`,    paint: ['Carbonized_Grey'], target: 220000, error: 0.01, renormal: 'keep' },
+  pajerosport:{ in: `${S}/pajerosport.glb`, paint: ['carpaint'], target: 250000, error: 0.01 },
+  patrol87:   { in: `${S}/patrol87.glb`,    paint: ['carpaint'], target: 250000, error: 0.01 },
+  supersafari:{ in: `${S}/supersafari.glb`, paint: [/paint/i], target: 250000, error: 0.01 },
   // new cars
   fj40:       { in: `${S}/fj40.glb`,        paint: ['FJ_BODYPAINT2'] },
   hummer:     { in: `${S}/hummer.glb`,      paint: ['mat_body'] },
@@ -29,9 +40,45 @@ const CFG = {
   wrangler4d: { in: `${S}/wrangler4d.glb`,  paint: ['CarPaaint'] },
   pajero:     { in: `${S}/pajero.glb`,      paint: ['carpaint'], target: 220000, error: 0.01, rotate: [-90, 0, 0] },
   rav4:       { in: `${S}/rav4.glb`,        paint: ['carpaint'], target: 220000, error: 0.01, rotate: [-90, 0, 0] },
-  galloper:   { in: `${S}/galloper.glb`,    paint: [], target: 250000, scan: true, error: 0.01, renormal: true },
-  korando:    { in: `${S}/korando.glb`,     paint: [], target: 250000, scan: true, error: 0.01, renormal: true },
+  galloper:   { in: `${S}/galloper.glb`,    paint: ['paint'], target: 250000, scan: true, error: 0.01, renormal: true,
+                segment: { test: (r, g, b, ny) => { const mx = Math.max(r, g, b), mn = Math.min(r, g, b); return mx > 0.45 && (mx - mn) < 0.22 && ny > 0.3 && ny < 0.88; } } },
+  korando:    { in: `${S}/korando.glb`,     paint: ['paint'], target: 250000, scan: true, error: 0.01, renormal: true,
+                segment: { test: (r, g, b, ny) => { const mx = Math.max(r, g, b), mn = Math.min(r, g, b); const red = r === mx && (mx - mn) > 0.18 && (g + b) / 2 < r * 0.6; const grey = (mx - mn) < 0.07 && mx > 0.35 && mx < 0.9 && ny > 0.5 && ny < 0.95; return red || grey; } } },
 };
+
+// split a single-material scan into "paint" / "rest" primitives by sampling the base-colour texture per triangle
+async function segmentPaint(doc, cfg) {
+  const root = doc.getRoot();
+  const mat = root.listMaterials()[0];
+  const tex = mat.getBaseColorTexture();
+  const { data, info } = await sharp(Buffer.from(tex.getImage())).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+  const W = info.width, H = info.height;
+  const sample = (u, v) => { u = u - Math.floor(u); v = v - Math.floor(v); const x = Math.min(W - 1, Math.floor(u * W)), y = Math.min(H - 1, Math.floor(v * H)); const i = (y * W + x) * 4; return [data[i] / 255, data[i+1] / 255, data[i+2] / 255]; };
+  const paintMat = mat.clone().setName('paint');
+  // normalised world-space height of each triangle (root node may be scaled / rotated)
+  const sb = getBounds(root.listScenes()[0]); const ymin = sb.min[1], yr = sb.max[1] - sb.min[1];
+  const worldOf = (mesh) => { const n = root.listNodes().find(n => n.getMesh() === mesh); return n ? n.getWorldMatrix() : [1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1]; };
+  let nPaint = 0, nAll = 0;
+  for (const mesh of root.listMeshes()) for (const prim of [...mesh.listPrimitives()]) {
+    const idx = prim.getIndices(); const uv = prim.getAttribute('TEXCOORD_0'); const pos = prim.getAttribute('POSITION'); if (!idx || !uv) continue;
+    const I = idx.getArray(); const paintI = [], restI = []; const t = [0, 0]; const q = [0, 0, 0]; const M = worldOf(mesh);
+    for (let k = 0; k < I.length; k += 3) {
+      let votes = 0, ny = 0;
+      for (let j = 0; j < 3; j++) { pos.getElement(I[k + j], q); const wy = M[1]*q[0] + M[5]*q[1] + M[9]*q[2] + M[13]; ny += (wy - ymin) / yr / 3; }
+      for (let j = 0; j < 3; j++) { uv.getElement(I[k + j], t); const c = sample(t[0], t[1]); if (cfg.segment.test(c[0], c[1], c[2], ny)) votes++; }
+      (votes >= 2 ? paintI : restI).push(I[k], I[k+1], I[k+2]);
+      nAll++;
+    }
+    nPaint += paintI.length / 3;
+    if (!paintI.length) continue;
+    const mk = (arr) => doc.createAccessor().setType('SCALAR').setArray(new Uint32Array(arr)).setBuffer(root.listBuffers()[0]);
+    if (restI.length) { prim.setIndices(mk(restI)); } else { mesh.removePrimitive(prim); }
+    const p2 = doc.createPrimitive().setMaterial(paintMat).setIndices(mk(paintI)).setMode(prim.getMode());
+    for (const sem of prim.listSemantics()) p2.setAttribute(sem, prim.getAttribute(sem));
+    mesh.addPrimitive(p2);
+  }
+  console.log(`  segment: ${nPaint}/${nAll} triangles classified as paint`);
+}
 
 // smooth (area-weighted) vertex normals, keeping the index buffer intact
 function smoothNormals(doc) {
@@ -74,6 +121,7 @@ for (const name of process.argv.slice(2)) {
   // 2. scan models: drop normal / metallic-roughness textures (size), keep base color
   if (cfg.scan) for (const m of root.listMaterials()) { m.setNormalTexture(null); m.setMetallicRoughnessTexture(null); m.setOcclusionTexture(null); m.setMetallicFactor(0); m.setRoughnessFactor(0.85); }
 
+  if (cfg.segment) await segmentPaint(doc, cfg);
   // 3. paint materials: make them tintable
   const paintNames = [];
   for (const m of root.listMaterials()) {
@@ -85,7 +133,7 @@ for (const name of process.argv.slice(2)) {
       const img = sharp(Buffer.from(tex.getImage()));
       const { data, info } = await img.ensureAlpha().raw().toBuffer({ resolveWithObject: true });
       let sr = 0, sg = 0, sb = 0, n = 0;
-      for (let i = 0; i < data.length; i += 4) { const r = data[i], g = data[i+1], b = data[i+2]; if (data[i+3] > 10 && Math.max(r, g, b) > 60) { sr += r; sg += g; sb += b; n++; } }
+      for (let i = 0; i < data.length; i += 4) { const r = data[i], g = data[i+1], b = data[i+2]; if (data[i+3] > 10 && Math.max(r, g, b) > 60 && (!cfg.segment || cfg.segment.test(r / 255, g / 255, b / 255, 0.5))) { sr += r; sg += g; sb += b; n++; } }
       const mean = [sr / n / 255, sg / n / 255, sb / n / 255];
       const meanLum = 0.2126 * mean[0] + 0.7152 * mean[1] + 0.0722 * mean[2];
       const out = Buffer.alloc(data.length);
@@ -134,7 +182,7 @@ for (const name of process.argv.slice(2)) {
   { let v = 0; for (const m of root.listMeshes()) for (const p of m.listPrimitives()) v += p.getAttribute('POSITION').getCount(); console.log(`  after weld: ${v} vertices, ${triCount(doc)} tris`); }
   const target = cfg.target || 250000;
   const ratio = Math.min(1, target / before);
-  if (ratio < 1) await doc.transform(simplify({ simplifier: MeshoptSimplifier, ratio, error: cfg.error || 0.001 }));
+  if (ratio < 1) await doc.transform(simplify({ simplifier: MeshoptSimplifier, ratio, error: cfg.error || 0.001, lockBorder: !!cfg.segment }));
   if (cfg.renormal && cfg.renormal !== 'keep') smoothNormals(doc);
   await doc.transform(
     resample(),
