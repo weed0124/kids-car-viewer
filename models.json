@@ -5,20 +5,42 @@
       "name": "지프 랭글러",
       "emoji": "🛞",
       "file": "models/wrangler.glb",
+      "paint": ["WRANG"],
       "note": "2007 Jeep Wrangler Rubicon by Ddiaz Design (Sketchfab, CC BY-NC-SA)"
+    },
+    {
+      "id": "wrangler4d",
+      "name": "지프 랭글러 (4문)",
+      "emoji": "🏕️",
+      "file": "models/wrangler4d.glb",
+      "paint": ["CarPaaint"],
+      "note": "2013 Equipped Jeep Wrangler Unlimited Rubicon by Ddiaz Design (Sketchfab, CC BY-NC-SA)"
     },
     {
       "id": "defender",
       "name": "랜드로버 디펜더",
-      "emoji": "🏕️",
+      "emoji": "🧭",
       "file": "models/defender.glb",
+      "paint": ["BodyColour_Mat1", "Roof_Color"],
       "note": "1997 Land Rover Defender 90 (Sketchfab)"
+    },
+    {
+      "id": "defender110",
+      "name": "새 디펜더 110",
+      "emoji": "🦁",
+      "file": "models/defender110.glb",
+      "paint": [
+        "2021_Land_Rover_Defender_110_Land_Rover_Defender_110_2020body_1",
+        "2021_Land_Rover_Defender_110_Land_Rover_Defender_110_2020body_2"
+      ],
+      "note": "2021 Land Rover Defender 110 by David_Holiday (Sketchfab, CC BY)"
     },
     {
       "id": "gclass",
       "name": "벤츠 G바겐",
       "emoji": "⬛",
       "file": "models/gclass.glb",
+      "paint": ["MMercedesAMG_G63SUVRewardRecycled_2020Paint_Material1"],
       "note": "2020 Mercedes-Benz G-Class AMG G63 (Sketchfab)"
     },
     {
@@ -26,6 +48,7 @@
       "name": "스즈키 짐니",
       "emoji": "🐹",
       "file": "models/jimny.glb",
+      "paint": ["Carro_Pintura"],
       "note": "2023 Suzuki Jimny Sierra by tonielpro520 (Sketchfab, CC BY)"
     },
     {
@@ -33,20 +56,72 @@
       "name": "포드 브롱코",
       "emoji": "🐎",
       "file": "models/bronco.glb",
+      "paint": ["BRChassis_XZSG1"],
       "note": "2021 Ford Bronco 2-door by Ddiaz Design (Sketchfab, CC BY-NC-SA)"
+    },
+    {
+      "id": "fj40",
+      "name": "토요타 랜드크루저 FJ40",
+      "emoji": "🟧",
+      "file": "models/fj40.glb",
+      "paint": ["FJ_BODYPAINT2"],
+      "note": "1976 Toyota Land Cruiser FJ40 by tonielpro520 (Sketchfab, CC BY)"
+    },
+    {
+      "id": "hummer",
+      "name": "허머 H2",
+      "emoji": "🦏",
+      "file": "models/hummer.glb",
+      "paint": ["mat_body"],
+      "color": [0.95, 0.72, 0.08],
+      "note": "HUMMER H2 by better_peter (Sketchfab, CC BY)"
+    },
+    {
+      "id": "pajero",
+      "name": "미쓰비시 파제로",
+      "emoji": "🏔️",
+      "file": "models/pajero.glb",
+      "paint": ["carpaint"],
+      "note": "Mitsubishi Pajero Mk2 Wagon 1991 by niev (Sketchfab, CC BY)"
+    },
+    {
+      "id": "rav4",
+      "name": "토요타 라브4",
+      "emoji": "🌲",
+      "file": "models/rav4.glb",
+      "paint": ["carpaint"],
+      "note": "Toyota RAV4 5door 2000 by niev (Sketchfab, CC BY)"
+    },
+    {
+      "id": "galloper",
+      "name": "현대 갤로퍼",
+      "emoji": "🐴",
+      "file": "models/galloper.glb",
+      "paint": [],
+      "note": "1994 Hyundai GALLOPER by teenlin3 (Sketchfab, CC BY) — 스캔 모델이라 색 바꾸기는 안 됨"
+    },
+    {
+      "id": "korando",
+      "name": "쌍용 코란도",
+      "emoji": "🐯",
+      "file": "models/korando.glb",
+      "paint": [],
+      "note": "Ssang Yong Korando 1997 by teenlin3 (Sketchfab, CC BY) — 스캔 모델이라 색 바꾸기는 안 됨"
     },
     {
       "id": "santafe",
       "name": "현대 싼타페",
-      "emoji": "🏔️",
+      "emoji": "🚙",
       "file": "models/santafe.glb",
+      "paint": ["santafek_body"],
       "note": "2024 Hyundai Santa Fe by Gerda (Sketchfab)"
     },
     {
       "id": "sorento",
       "name": "기아 쏘렌토",
-      "emoji": "🚙",
+      "emoji": "🚐",
       "file": "models/sorento.glb",
+      "paint": ["template_carpaint.014"],
       "note": "2022 Kia Sorento PHEV by twr422 (Sketchfab, CC BY)"
     }
   ]
