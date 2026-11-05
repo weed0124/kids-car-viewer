@@ -23,6 +23,13 @@ const CFG = {
   bronco:     { in: `${S}/bronco/scene.gltf`,    paint: ['BRChassis_XZSG1'] },
   santafe:    { in: `${S}/santafe/scene.gltf`,   paint: ['santafek_body'], target: 220000, error: 0.01 },
   sorento:    { in: `${S}/sorento/scene.gltf`,   paint: ['template_carpaint.014'], target: 220000, error: 0.01, renormal: true },
+  // round 3 (2026-11-05)
+  zetros:     { in: `${S}/zetros.glb`,     paint: ['carp'] },
+  g4x4:       { in: `${S}/g4x4.glb`,       paint: ['CarPaint'] },
+  hummerev:   { in: `${S}/hummerev.glb`,   paint: ['CarPaint'], target: 250000, error: 0.01, renormal: true },
+  lc250:      { in: `${S}/lc250.glb`,      paint: ['CarPaint'], target: 250000, error: 0.02, renormal: true },
+  ramtrx:     { in: `${S}/ramtrx.glb`,     paint: [/2021Paint_Material$/] },
+  raptor:     { in: `${S}/raptor.glb`,     paint: ['RaptorPaaint'], target: 250000, error: 0.01 },
   // new cars (round 2, higher quality)
   wrangler23: { in: `${S}/wrangler23.glb`,  paint: ['JMI_1355060001_004'] },
   gladiator:  { in: `${S}/gladiator.glb`,   paint: [/2019Paint/] },

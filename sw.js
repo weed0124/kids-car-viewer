@@ -1,4 +1,4 @@
-const CACHE = 'car-viewer-v10';
+const CACHE = 'car-viewer-v11';
 const SHELL = [
   '.',
   'index.html',
@@ -13,7 +13,7 @@ const SHELL = [
 ];
 
 // 녹음한 목소리 파일은 있는 것만 미리 받아 둔다 (없는 파일 때문에 설치가 실패하면 안 되므로 하나씩 try)
-const SOUND_IDS = ['wrangler4d', 'wrangler23', 'wrangler', 'gladiator', 'gclass25', 'gclass', 'defenderpickup', 'defender', 'bronco', 'hummerh3', 'supersafari'];
+const SOUND_IDS = ['wrangler4d', 'wrangler23', 'wrangler', 'gladiator', 'gclass25', 'gclass', 'defenderpickup', 'defender', 'bronco', 'hummerh3', 'supersafari', 'g4x4', 'hummerev', 'zetros', 'lc250', 'ramtrx', 'raptor'];
 const SOUND_EXTS = ['webm', 'm4a', 'mp3'];
 
 self.addEventListener('install', (e) => {

@@ -79,6 +79,32 @@
       }
     },
     {
+      "id": "g4x4",
+      "name": "벤츠 G500 4x4² (괴물 G바겐)",
+      "emoji": "🟢",
+      "file": "models/g4x4.glb",
+      "paint": [
+        "CarPaint"
+      ],
+      "note": "2015 Mercedes-Benz G500 4x4² Concept by Ddiaz Design (Sketchfab, CC BY-NC-SA)",
+      "lines": {
+        "intro": "벤츠 G500 4x4 스퀘어드! 바퀴가 엄청나게 커서 G바겐 중에서도 키가 제일 커요. 형광 노란색이 멀리서도 눈에 확 띄죠? 뒤에 보조바퀴도 달려 있어요."
+      }
+    },
+    {
+      "id": "hummerev",
+      "name": "GMC 허머 EV",
+      "emoji": "⚡",
+      "file": "models/hummerev.glb",
+      "paint": [
+        "CarPaint"
+      ],
+      "note": "2024 GMC Hummer EV SUV by Ddiaz Design (Sketchfab, CC BY-NC-SA)",
+      "lines": {
+        "intro": "GMC 허머 EV! 기름 대신 전기로 달리는 커다란 허머예요. 바퀴 네 개가 다 꺾여서 게처럼 옆으로도 갈 수 있어요. 뒤에 보조바퀴가 붙어 있어요!"
+      }
+    },
+    {
       "id": "defenderpickup",
       "name": "디펜더 110 픽업",
       "emoji": "🧰",
@@ -142,6 +168,58 @@
       "note": "Nissan Super Safari SDC PERFORMANCE by Lambo_SC04 (Sketchfab, CC BY)",
       "lines": {
         "intro": "닛산 패트롤 슈퍼 사파리! 사막의 모래 언덕을 신나게 오르내리는 차예요. 까만 차체에 주황색 줄무늬가 멋져요!"
+      }
+    },
+    {
+      "id": "zetros",
+      "name": "벤츠 제트로스 트럭",
+      "emoji": "🚚",
+      "file": "models/zetros.glb",
+      "paint": [
+        "carp"
+      ],
+      "note": "2009 Mercedes-Benz Zetros 1833 4x4 by Ddiaz Design (Sketchfab, CC BY-NC-SA)",
+      "lines": {
+        "intro": "벤츠 제트로스! 사막과 산을 넘어 탐험을 떠나는 커다란 트럭이에요. 뒤 짐칸에 기름통과 텐트를 싣고 아주 멀리까지 갈 수 있어요."
+      }
+    },
+    {
+      "id": "lc250",
+      "name": "토요타 랜드크루저 250",
+      "emoji": "🔷",
+      "file": "models/lc250.glb",
+      "paint": [
+        "CarPaint"
+      ],
+      "note": "2025 Toyota Land Cruiser 250 by Ddiaz Design (Sketchfab, CC BY-NC-SA)",
+      "lines": {
+        "intro": "토요타 랜드크루저 250! 네모난 눈을 가진 새 랜드크루저예요. 전 세계 어디든, 사막이든 눈길이든 끝까지 달리는 튼튼한 차예요."
+      }
+    },
+    {
+      "id": "ramtrx",
+      "name": "램 1500 TRX",
+      "emoji": "🦖",
+      "file": "models/ramtrx.glb",
+      "paint": [
+        "RAM_1500TRX_2021Paint_Material"
+      ],
+      "note": "2021 Ram 1500 TRX by Ddiaz Design (Sketchfab, CC BY-NC-SA)",
+      "lines": {
+        "intro": "램 1500 TRX! 티라노사우루스처럼 힘이 센 픽업트럭이에요. 보닛에 커다란 구멍으로 바람을 들이마시면서 쌩쌩 달려요."
+      }
+    },
+    {
+      "id": "raptor",
+      "name": "포드 F-150 랩터",
+      "emoji": "🦅",
+      "file": "models/raptor.glb",
+      "paint": [
+        "RaptorPaaint"
+      ],
+      "note": "2024 Ford F-150 Raptor R by Ddiaz Design (Sketchfab, CC BY-NC-SA)",
+      "lines": {
+        "intro": "포드 F-150 랩터! 랩터는 무서운 공룡 이름이에요. 사막을 점프하면서 달려도 끄떡없는 커다란 픽업트럭이에요."
       }
     }
   ]

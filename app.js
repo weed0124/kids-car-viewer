@@ -91,6 +91,7 @@ function buildColorBar() {
 
 // 모델이 다 불러와지면: 도장 재질 찾기 → 원래 색 기억 → 저장된 색(있으면) 입히기
 viewer.addEventListener('load', () => {
+  loadFill.parentElement.style.opacity = '0';
   const car = cars[index];
   const names = car.paint || [];
   paintMaterials = viewer.model.materials.filter((m) => names.includes(m.name));

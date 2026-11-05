@@ -4,9 +4,9 @@
 차 색깔도 마음대로 바꿀 수 있습니다. 안드로이드 홈 화면에 설치하면 일반 앱처럼 전체화면으로 실행되고,
 한 번 본 차는 오프라인에서도 보입니다.
 
-## 들어있는 차 (11대)
+## 들어있는 차 (17대)
 
-실제 텍스처가 입혀진 고품질 모델만 남겼습니다(대부분 Ddiaz Design 제작). 전부 뒤에 보조바퀴가 달린 차고, 글래디에이터만 짐칸 아래입니다.
+실제 텍스처가 입혀진 고품질 모델만 넣었습니다(대부분 Ddiaz Design 제작). 뒤에 보조바퀴가 달린 차가 기본이고, 글래디에이터·제트로스·랜드크루저 250·TRX·랩터는 보조바퀴가 뒤에 없지만 아이들이 좋아할 만해서 넣었습니다.
 
 | 차 | 출처 (Sketchfab) | 색 바꾸기 |
 |---|---|---|
@@ -21,6 +21,12 @@
 | 포드 브롱코 2문 (2021) | Ddiaz Design, CC BY-NC-SA | ✅ |
 | 허머 H3 | David_Holiday, CC BY | ✅ |
 | 닛산 패트롤 슈퍼 사파리 | Lambo_SC04, CC BY | ✅ |
+| 벤츠 G500 4x4² (2015) | Ddiaz Design, CC BY-NC-SA | ✅ |
+| GMC 허머 EV SUV (2024) | Ddiaz Design, CC BY-NC-SA | ✅ |
+| 벤츠 제트로스 1833 4x4 트럭 (2009) | Ddiaz Design, CC BY-NC-SA | ✅ |
+| 토요타 랜드크루저 250 (2025) | Ddiaz Design, CC BY-NC-SA | ✅ |
+| 램 1500 TRX (2021) | Ddiaz Design, CC BY-NC-SA | ✅ |
+| 포드 F-150 랩터 R (2024) | Ddiaz Design, CC BY-NC-SA | ✅ |
 
 뺀 모델(단색 평면 모델이거나 사진 스캔이라 질감이 아쉬운 것)의 원본과 변환 설정은 `~/Downloads/kids-car-model/`과
 `tools/build-models.mjs`에 그대로 있어서, 필요하면 다시 빌드해 넣을 수 있습니다.
@@ -118,7 +124,7 @@ icons/                            # 앱 아이콘
 
 ## 모델 변환 스크립트 (tools/)
 
-`tools/build-models.mjs`가 지금 들어있는 11대를 만든 스크립트입니다. 새 차를 넣을 때 `CFG`에 한 줄 추가하고:
+`tools/build-models.mjs`가 지금 들어있는 17대를 만든 스크립트입니다. 새 차를 넣을 때 `CFG`에 한 줄 추가하고:
 
 ```bash
 cd tools && npm install
