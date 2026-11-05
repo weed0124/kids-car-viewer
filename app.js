@@ -120,12 +120,11 @@ function applyColor(colorId, save = true) {
 // ---- 소리 (세이펜처럼: 설명 / 출발 / 빵빵) ------------------------------------
 // 목소리: sounds/<id>-intro.*, sounds/<id>-go.* (record.html에서 직접 녹음해 저장한 파일. webm → m4a → mp3 순으로 찾음)
 // 파일이 하나도 없으면 브라우저 음성합성(speechSynthesis)이 models.json의 lines를 대신 읽어줌.
-// 엔진 소리와 경적은 Web Audio로 그 자리에서 합성. 차마다 engine 설정(models.json)으로 음이 달라짐.
+// 경적은 Web Audio로 그 자리에서 합성 (models.json의 engine.horn 으로 음높이).
 
 const SOUND_EXTS = ['webm', 'm4a', 'mp3'];
 let audioCtx = null;
 let voice = null;          // 지금 재생 중인 <audio>
-let engineStop = null;     // 엔진 소리 끄는 함수
 
 function ctx() {
   if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -136,7 +135,6 @@ function ctx() {
 function stopAllSound() {
   if (voice) { voice.pause(); voice = null; }
   if (window.speechSynthesis) speechSynthesis.cancel();
-  if (engineStop) { engineStop(); engineStop = null; }
   for (const b of [introBtn, goBtn, hornBtn]) b.classList.remove('playing');
 }
 
@@ -165,40 +163,6 @@ function playVoice(kind, btn) {
   });
 }
 
-// 엔진 소리: 톱니파 두 개 + 낮은 웅웅거림. rpm을 올렸다 내리면 "부아앙" 느낌
-function startEngine(cfg) {
-  const c = ctx();
-  const base = (cfg && cfg.hz) || 55;        // 기본음 (큰 엔진일수록 낮게)
-  const rough = (cfg && cfg.rough) || 0.5;   // 거친 정도
-  const master = c.createGain(); master.gain.value = 0; master.connect(c.destination);
-  const lp = c.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 600; lp.connect(master);
-  const oscs = [c.createOscillator(), c.createOscillator(), c.createOscillator()];
-  oscs[0].type = 'sawtooth'; oscs[1].type = 'square'; oscs[2].type = 'triangle';
-  oscs.forEach((o, i) => { const g = c.createGain(); g.gain.value = [0.5, 0.25 * rough, 0.6][i]; o.connect(g); g.connect(lp); });
-  const lfo = c.createOscillator(); lfo.type = 'sine'; lfo.frequency.value = 18;
-  const lfoGain = c.createGain(); lfoGain.gain.value = base * 0.08; lfo.connect(lfoGain);
-  for (const o of oscs) lfoGain.connect(o.frequency);
-  const t = c.currentTime;
-  const setRpm = (mult, at) => {
-    oscs[0].frequency.setTargetAtTime(base * mult, at, 0.15);
-    oscs[1].frequency.setTargetAtTime(base * mult * 1.5, at, 0.15);
-    oscs[2].frequency.setTargetAtTime(base * mult * 0.5, at, 0.15);
-    lp.frequency.setTargetAtTime(400 + 900 * mult, at, 0.15);
-  };
-  setRpm(1, t);
-  master.gain.setTargetAtTime(0.35, t, 0.1);
-  for (const o of [...oscs, lfo]) o.start(t);
-  // 시동 → 부릉부릉 → 부아앙 → 천천히
-  setRpm(1.3, t + 0.6); setRpm(1.0, t + 1.1); setRpm(1.4, t + 1.5); setRpm(1.0, t + 2.0);
-  setRpm(2.6, t + 3.0); setRpm(3.2, t + 4.2); setRpm(1.2, t + 5.5);
-  return () => {
-    const now = c.currentTime;
-    master.gain.cancelScheduledValues(now);
-    master.gain.setTargetAtTime(0, now, 0.25);
-    for (const o of [...oscs, lfo]) { try { o.stop(now + 1.2); } catch (e) {} }
-  };
-}
-
 // 경적: 두 음을 같이 (차마다 음높이 조금 다르게)
 function honk(cfg) {
   const c = ctx();
@@ -221,14 +185,9 @@ async function speakIntro() {
 
 async function goGo() {
   stopAllSound();
-  const car = cars[index];
-  engineStop = startEngine(car.engine);
   viewer.autoRotate = true;
   rotateBtn.classList.add('on');
-  await new Promise((r) => setTimeout(r, 500));
   await playVoice('go', goBtn);
-  await new Promise((r) => setTimeout(r, 2500));
-  if (engineStop) { engineStop(); engineStop = null; }
 }
 
 introBtn.addEventListener('click', speakIntro);

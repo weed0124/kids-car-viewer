@@ -10,8 +10,6 @@
       ],
       "note": "2013 Equipped Jeep Wrangler Unlimited Rubicon by Ddiaz Design (Sketchfab, CC BY-NC-SA)",
       "engine": {
-        "hz": 60,
-        "rough": 0.6,
         "horn": 400
       },
       "lines": {
@@ -29,8 +27,6 @@
       ],
       "note": "2023 Jeep Wrangler Rubicon 392 20th Anniversary by Ddiaz Design (Sketchfab, CC BY-NC-SA)",
       "engine": {
-        "hz": 45,
-        "rough": 0.8,
         "horn": 380
       },
       "lines": {
@@ -48,8 +44,6 @@
       ],
       "note": "2007 Jeep Wrangler Rubicon by Ddiaz Design (Sketchfab, CC BY-NC-SA)",
       "engine": {
-        "hz": 62,
-        "rough": 0.5,
         "horn": 420
       },
       "lines": {
@@ -67,8 +61,6 @@
       ],
       "note": "2020 Jeep Gladiator by Ddiaz Design (Sketchfab, CC BY-NC-SA) — 보조바퀴는 짐칸 아래",
       "engine": {
-        "hz": 58,
-        "rough": 0.6,
         "horn": 400
       },
       "lines": {
@@ -86,8 +78,6 @@
       ],
       "note": "2025 Mercedes-Benz G-Class AMG G 63 by Ddiaz Design (Sketchfab, CC BY-NC-SA)",
       "engine": {
-        "hz": 44,
-        "rough": 0.9,
         "horn": 360
       },
       "lines": {
@@ -105,8 +95,6 @@
       ],
       "note": "2020 Mercedes-Benz G-Class AMG G63 by Ddiaz Design (Sketchfab, CC BY-NC-SA)",
       "engine": {
-        "hz": 46,
-        "rough": 0.8,
         "horn": 360
       },
       "lines": {
@@ -124,8 +112,6 @@
       ],
       "note": "Land Rover Defender 110 Double Cab Pick Up by Ddiaz Design (Sketchfab, CC BY)",
       "engine": {
-        "hz": 50,
-        "rough": 1.0,
         "horn": 440
       },
       "lines": {
@@ -144,8 +130,6 @@
       ],
       "note": "1997 Land Rover Defender 90 (Sketchfab)",
       "engine": {
-        "hz": 52,
-        "rough": 1.0,
         "horn": 460
       },
       "lines": {
@@ -163,8 +147,6 @@
       ],
       "note": "2021 Ford Bronco 2-door by Ddiaz Design (Sketchfab, CC BY-NC-SA)",
       "engine": {
-        "hz": 58,
-        "rough": 0.6,
         "horn": 410
       },
       "lines": {
@@ -182,8 +164,6 @@
       ],
       "note": "Hummer H3 by David_Holiday (Sketchfab, CC BY)",
       "engine": {
-        "hz": 54,
-        "rough": 0.7,
         "horn": 340
       },
       "lines": {
@@ -201,8 +181,6 @@
       ],
       "note": "Nissan Super Safari SDC PERFORMANCE by Lambo_SC04 (Sketchfab, CC BY)",
       "engine": {
-        "hz": 42,
-        "rough": 0.9,
         "horn": 370
       },
       "lines": {
