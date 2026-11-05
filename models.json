@@ -5,88 +5,210 @@
       "name": "지프 랭글러 (4문)",
       "emoji": "🏕️",
       "file": "models/wrangler4d.glb",
-      "paint": ["CarPaaint"],
-      "note": "2013 Equipped Jeep Wrangler Unlimited Rubicon by Ddiaz Design (Sketchfab, CC BY-NC-SA)"
+      "paint": [
+        "CarPaaint"
+      ],
+      "note": "2013 Equipped Jeep Wrangler Unlimited Rubicon by Ddiaz Design (Sketchfab, CC BY-NC-SA)",
+      "engine": {
+        "hz": 60,
+        "rough": 0.6,
+        "horn": 400
+      },
+      "lines": {
+        "intro": "지프 랭글러, 문이 네 개인 랭글러예요! 가족이 다 같이 탈 수 있고, 지붕 위에는 짐이 가득 실려 있어요. 뒤에 달린 보조바퀴도 찾아보세요!",
+        "go": "지프 랭글러, 출발! 울퉁불퉁 산길도 신나게 달려보자! 부릉부릉!"
+      }
     },
     {
       "id": "wrangler23",
       "name": "지프 랭글러 루비콘 392",
       "emoji": "🔵",
       "file": "models/wrangler23.glb",
-      "paint": ["JMI_1355060001_004"],
-      "note": "2023 Jeep Wrangler Rubicon 392 20th Anniversary by Ddiaz Design (Sketchfab, CC BY-NC-SA)"
+      "paint": [
+        "JMI_1355060001_004"
+      ],
+      "note": "2023 Jeep Wrangler Rubicon 392 20th Anniversary by Ddiaz Design (Sketchfab, CC BY-NC-SA)",
+      "engine": {
+        "hz": 45,
+        "rough": 0.8,
+        "horn": 380
+      },
+      "lines": {
+        "intro": "지프 랭글러 루비콘 392! 아주 힘센 엔진이 들어 있어서 큰 바위도 쑥쑥 넘어가요. 파란색 차체가 정말 멋지죠?",
+        "go": "루비콘 392, 출발! 바위산을 넘어 신나게 달려보자! 부아앙!"
+      }
     },
     {
       "id": "wrangler",
       "name": "지프 랭글러 (2문)",
       "emoji": "🛞",
       "file": "models/wrangler.glb",
-      "paint": ["WRANG"],
-      "note": "2007 Jeep Wrangler Rubicon by Ddiaz Design (Sketchfab, CC BY-NC-SA)"
+      "paint": [
+        "WRANG"
+      ],
+      "note": "2007 Jeep Wrangler Rubicon by Ddiaz Design (Sketchfab, CC BY-NC-SA)",
+      "engine": {
+        "hz": 62,
+        "rough": 0.5,
+        "horn": 420
+      },
+      "lines": {
+        "intro": "지프 랭글러, 문이 두 개인 빨간 랭글러예요! 동그란 헤드라이트가 꼭 눈처럼 생겼죠? 뒤에는 보조바퀴가 붙어 있어요.",
+        "go": "랭글러, 출발! 숲속 길을 신나게 달려보자! 부릉부릉!"
+      }
     },
     {
       "id": "gladiator",
       "name": "지프 글래디에이터",
       "emoji": "🛻",
       "file": "models/gladiator.glb",
-      "paint": ["Jeep_GladiatorRewardRecycled_2019Paint_Material"],
-      "note": "2020 Jeep Gladiator by Ddiaz Design (Sketchfab, CC BY-NC-SA) — 보조바퀴는 짐칸 아래"
+      "paint": [
+        "Jeep_GladiatorRewardRecycled_2019Paint_Material"
+      ],
+      "note": "2020 Jeep Gladiator by Ddiaz Design (Sketchfab, CC BY-NC-SA) — 보조바퀴는 짐칸 아래",
+      "engine": {
+        "hz": 58,
+        "rough": 0.6,
+        "horn": 400
+      },
+      "lines": {
+        "intro": "지프 글래디에이터! 랭글러에 짐칸이 달린 픽업트럭이에요. 자전거도, 캠핑 짐도 뒤에 실을 수 있어요!",
+        "go": "글래디에이터, 출발! 짐을 가득 싣고 신나게 달려보자! 부릉부릉!"
+      }
     },
     {
       "id": "gclass25",
       "name": "벤츠 G63 (2025)",
       "emoji": "⬛",
       "file": "models/gclass25.glb",
-      "paint": ["MMAT_CarPaint_010"],
-      "note": "2025 Mercedes-Benz G-Class AMG G 63 by Ddiaz Design (Sketchfab, CC BY-NC-SA)"
+      "paint": [
+        "MMAT_CarPaint_010"
+      ],
+      "note": "2025 Mercedes-Benz G-Class AMG G 63 by Ddiaz Design (Sketchfab, CC BY-NC-SA)",
+      "engine": {
+        "hz": 44,
+        "rough": 0.9,
+        "horn": 360
+      },
+      "lines": {
+        "intro": "벤츠 G63! 네모반듯한 모양이 멋진 차예요. 아주 빠르고 튼튼해서 어디든 갈 수 있어요. 뒤에 동그란 보조바퀴가 보이나요?",
+        "go": "G63, 출발! 도로 위를 쌩쌩 달려보자! 부아아앙!"
+      }
     },
     {
       "id": "gclass",
       "name": "벤츠 G63 (2020)",
       "emoji": "◼️",
       "file": "models/gclass.glb",
-      "paint": ["MMercedesAMG_G63SUVRewardRecycled_2020Paint_Material1"],
-      "note": "2020 Mercedes-Benz G-Class AMG G63 by Ddiaz Design (Sketchfab, CC BY-NC-SA)"
+      "paint": [
+        "MMercedesAMG_G63SUVRewardRecycled_2020Paint_Material1"
+      ],
+      "note": "2020 Mercedes-Benz G-Class AMG G63 by Ddiaz Design (Sketchfab, CC BY-NC-SA)",
+      "engine": {
+        "hz": 46,
+        "rough": 0.8,
+        "horn": 360
+      },
+      "lines": {
+        "intro": "벤츠 G바겐! 사십 년 넘게 똑같은 네모 모양을 지켜온 차예요. 문을 닫으면 철컥! 하고 아주 묵직한 소리가 나요.",
+        "go": "G바겐, 출발! 신나게 달려보자! 부릉부릉!"
+      }
     },
     {
       "id": "defenderpickup",
       "name": "디펜더 110 픽업",
       "emoji": "🧰",
       "file": "models/defenderpickup.glb",
-      "paint": ["defenderM_CarPaint_Max1"],
-      "note": "Land Rover Defender 110 Double Cab Pick Up by Ddiaz Design (Sketchfab, CC BY)"
+      "paint": [
+        "defenderM_CarPaint_Max1"
+      ],
+      "note": "Land Rover Defender 110 Double Cab Pick Up by Ddiaz Design (Sketchfab, CC BY)",
+      "engine": {
+        "hz": 50,
+        "rough": 1.0,
+        "horn": 440
+      },
+      "lines": {
+        "intro": "랜드로버 디펜더 픽업! 농장에서도, 산에서도 씩씩하게 일하는 차예요. 뒤에 넓은 짐칸이 있어요.",
+        "go": "디펜더 픽업, 출발! 진흙길도 거뜬히 달려보자! 부릉부릉!"
+      }
     },
     {
       "id": "defender",
       "name": "디펜더 90 (1997)",
       "emoji": "🧭",
       "file": "models/defender.glb",
-      "paint": ["BodyColour_Mat1", "Roof_Color"],
-      "note": "1997 Land Rover Defender 90 (Sketchfab)"
+      "paint": [
+        "BodyColour_Mat1",
+        "Roof_Color"
+      ],
+      "note": "1997 Land Rover Defender 90 (Sketchfab)",
+      "engine": {
+        "hz": 52,
+        "rough": 1.0,
+        "horn": 460
+      },
+      "lines": {
+        "intro": "랜드로버 디펜더 90! 영국에서 온 튼튼한 차예요. 진흙길도, 강물도 문제없이 건너요. 뒤에 보조바퀴가 달려 있어요!",
+        "go": "디펜더, 출발! 강을 건너 신나게 달려보자! 첨벙첨벙, 부릉부릉!"
+      }
     },
     {
       "id": "bronco",
       "name": "포드 브롱코",
       "emoji": "🐎",
       "file": "models/bronco.glb",
-      "paint": ["BRChassis_XZSG1"],
-      "note": "2021 Ford Bronco 2-door by Ddiaz Design (Sketchfab, CC BY-NC-SA)"
+      "paint": [
+        "BRChassis_XZSG1"
+      ],
+      "note": "2021 Ford Bronco 2-door by Ddiaz Design (Sketchfab, CC BY-NC-SA)",
+      "engine": {
+        "hz": 58,
+        "rough": 0.6,
+        "horn": 410
+      },
+      "lines": {
+        "intro": "포드 브롱코! 브롱코는 야생마라는 뜻이에요. 지붕을 떼어내면 하늘이 보여요. 커다란 바퀴로 모래밭도 달려요!",
+        "go": "브롱코, 출발! 야생마처럼 신나게 달려보자! 히힝, 부릉부릉!"
+      }
     },
     {
       "id": "hummerh3",
       "name": "허머 H3",
       "emoji": "🦏",
       "file": "models/hummerh3.glb",
-      "paint": ["Body"],
-      "note": "Hummer H3 by David_Holiday (Sketchfab, CC BY)"
+      "paint": [
+        "Body"
+      ],
+      "note": "Hummer H3 by David_Holiday (Sketchfab, CC BY)",
+      "engine": {
+        "hz": 54,
+        "rough": 0.7,
+        "horn": 340
+      },
+      "lines": {
+        "intro": "허머 H3! 군인 아저씨들이 타던 차에서 태어난 차예요. 커다란 바퀴와 네모난 몸이 정말 튼튼해 보이죠?",
+        "go": "허머, 출발! 큰 바퀴로 신나게 달려보자! 부릉부릉!"
+      }
     },
     {
       "id": "supersafari",
       "name": "닛산 패트롤 슈퍼 사파리",
       "emoji": "🖤",
       "file": "models/supersafari.glb",
-      "paint": ["carpaint"],
-      "note": "Nissan Super Safari SDC PERFORMANCE by Lambo_SC04 (Sketchfab, CC BY)"
+      "paint": [
+        "carpaint"
+      ],
+      "note": "Nissan Super Safari SDC PERFORMANCE by Lambo_SC04 (Sketchfab, CC BY)",
+      "engine": {
+        "hz": 42,
+        "rough": 0.9,
+        "horn": 370
+      },
+      "lines": {
+        "intro": "닛산 패트롤 슈퍼 사파리! 사막의 모래 언덕을 신나게 오르내리는 차예요. 까만 차체에 주황색 줄무늬가 멋져요!",
+        "go": "슈퍼 사파리, 출발! 사막 모래 위를 신나게 달려보자! 부아아앙!"
+      }
     }
   ]
 }

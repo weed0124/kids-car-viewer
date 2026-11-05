@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>목소리 녹음 - 자동차 구경</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; padding: 16px; font-family: "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif; background: #16243f; color: #fff; }
+    h1 { font-size: 22px; margin: 0 0 6px; }
+    p.help { opacity: .8; font-size: 14px; margin: 0 0 16px; line-height: 1.5; }
+    .car { background: rgba(255,255,255,.08); border-radius: 16px; padding: 14px; margin-bottom: 14px; }
+    .car h2 { font-size: 18px; margin: 0 0 10px; }
+    .line { display: grid; grid-template-columns: 1fr; gap: 8px; padding: 10px; border-radius: 12px; background: rgba(0,0,0,.25); margin-bottom: 8px; }
+    .line .kind { font-size: 12px; font-weight: 800; color: #ffb63d; }
+    .line .text { font-size: 16px; line-height: 1.5; }
+    .ctl { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+    button { border: none; border-radius: 999px; padding: 10px 14px; font-size: 15px; font-weight: 800; color: #fff; background: rgba(255,255,255,.16); cursor: pointer; }
+    button:disabled { opacity: .35; }
+    button.rec { background: #e03131; }
+    button.rec.on { background: #ffb63d; color: #3a2800; animation: blink .7s infinite alternate; }
+    button.save { background: #2f9e44; }
+    @keyframes blink { from { opacity: 1; } to { opacity: .5; } }
+    .state { font-size: 13px; opacity: .85; }
+    .done { color: #8ce99a; font-weight: 800; }
+    #top { position: sticky; top: 0; background: #16243f; padding: 8px 0 12px; z-index: 2; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+    #top button { background: #2f9e44; }
+    #err { color: #ffa8a8; font-size: 14px; }
+  </style>
+</head>
+<body>
+  <h1>🎙️ 목소리 녹음</h1>
+  <p class="help">
+    차마다 두 줄(설명, 출발)을 읽어서 녹음합니다. 🔴 누르고 읽은 뒤 ⏹, ▶로 들어보고, 괜찮으면 저장.
+    다 끝나면 맨 위 "전부 저장"을 누르면 파일들이 내려받아집니다. 그 파일들을 <b>sounds/</b> 폴더에 넣으면 끝.
+    조용한 곳에서, 마이크에서 한 뼘쯤 떨어져 또박또박 읽으면 제일 잘 들려요.
+  </p>
+  <div id="top">
+    <button id="save-all" disabled>💾 전부 저장 (0개)</button>
+    <span class="state" id="mic-state">마이크 준비 중…</span>
+    <span id="err"></span>
+  </div>
+  <div id="list"></div>
+
+  <script>
+    const list = document.getElementById('list');
+    const saveAllBtn = document.getElementById('save-all');
+    const micState = document.getElementById('mic-state');
+    const errBox = document.getElementById('err');
+    const KINDS = [['intro', '📢 설명'], ['go', '🏁 출발']];
+    const clips = new Map();   // "id-kind" -> { blob, ext }
+    let stream = null;
+    let recorder = null;
+    let current = null;        // 녹음 중인 줄
+
+    // 브라우저가 녹음할 수 있는 형식 고르기 (크롬/안드로이드: webm, 사파리: mp4)
+    const pickType = () => {
+      for (const [t, ext] of [['audio/webm;codecs=opus', 'webm'], ['audio/webm', 'webm'], ['audio/mp4', 'm4a'], ['audio/ogg', 'ogg']]) {
+        if (window.MediaRecorder && MediaRecorder.isTypeSupported(t)) return { mime: t, ext };
+      }
+      return null;
+    };
+    const fmt = pickType();
+
+    async function initMic() {
+      if (!fmt) { errBox.textContent = '이 브라우저는 녹음을 지원하지 않아요. 크롬으로 열어주세요.'; return; }
+      if (!window.isSecureContext) { errBox.textContent = '녹음은 https 또는 localhost에서만 됩니다. (폰에서는 GitHub Pages 주소로 열어주세요)'; return; }
+      try {
+        stream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true } });
+        micState.textContent = `마이크 준비됨 (${fmt.ext})`;
+      } catch (e) {
+        errBox.textContent = '마이크 권한이 필요해요. 주소창 옆 자물쇠에서 마이크를 허용해 주세요.';
+      }
+    }
+
+    function fileName(key) { return `${key}.${fmt.ext}`; }
+
+    function download(blob, name) {
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = name;
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+    }
+
+    function refreshSaveAll() {
+      saveAllBtn.disabled = clips.size === 0;
+      saveAllBtn.textContent = `💾 전부 저장 (${clips.size}개)`;
+    }
+
+    function build(cars) {
+      for (const car of cars) {
+        const box = document.createElement('div'); box.className = 'car';
+        box.innerHTML = `<h2>${car.emoji} ${car.name}</h2>`;
+        for (const [kind, label] of KINDS) {
+          const key = `${car.id}-${kind}`;
+          const text = (car.lines && car.lines[kind]) || car.name;
+          const row = document.createElement('div'); row.className = 'line';
+          row.innerHTML = `
+            <div class="kind">${label} · ${fileName(key)}</div>
+            <div class="text">${text}</div>
+            <div class="ctl">
+              <button class="rec">🔴 녹음</button>
+              <button class="stop" disabled>⏹ 정지</button>
+              <button class="play" disabled>▶ 들어보기</button>
+              <button class="save" disabled>💾 저장</button>
+              <span class="state"></span>
+            </div>`;
+          const [recBtn, stopBtn, playBtn, saveBtn] = row.querySelectorAll('button');
+          const state = row.querySelector('.state');
+          let player = null;
+
+          recBtn.addEventListener('click', () => {
+            if (!stream) return initMic();
+            if (current) return;
+            const chunks = [];
+            recorder = new MediaRecorder(stream, { mimeType: fmt.mime });
+            recorder.ondataavailable = (e) => { if (e.data.size) chunks.push(e.data); };
+            recorder.onstop = () => {
+              const blob = new Blob(chunks, { type: fmt.mime });
+              clips.set(key, blob);
+              state.innerHTML = `<span class="done">녹음됨 ✓</span> ${(blob.size / 1024).toFixed(0)}KB`;
+              playBtn.disabled = false; saveBtn.disabled = false;
+              recBtn.classList.remove('on'); recBtn.textContent = '🔴 다시 녹음';
+              stopBtn.disabled = true; current = null;
+              refreshSaveAll();
+            };
+            recorder.start();
+            current = key;
+            recBtn.classList.add('on'); recBtn.textContent = '● 녹음 중';
+            stopBtn.disabled = false;
+            state.textContent = '읽어주세요…';
+          });
+          stopBtn.addEventListener('click', () => { if (recorder && recorder.state !== 'inactive') recorder.stop(); });
+          playBtn.addEventListener('click', () => {
+            if (player) { player.pause(); }
+            player = new Audio(URL.createObjectURL(clips.get(key)));
+            player.play();
+          });
+          saveBtn.addEventListener('click', () => download(clips.get(key), fileName(key)));
+          box.appendChild(row);
+        }
+        list.appendChild(box);
+      }
+    }
+
+    saveAllBtn.addEventListener('click', async () => {
+      // 브라우저가 "여러 파일 다운로드"를 물어보면 허용해 주세요
+      for (const [key, blob] of clips) { download(blob, fileName(key)); await new Promise((r) => setTimeout(r, 400)); }
+    });
+
+    fetch('models.json').then((r) => r.json()).then((d) => { build(d.cars); initMic(); });
+  </script>
+</body>
+</html>

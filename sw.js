@@ -1,4 +1,4 @@
-const CACHE = 'car-viewer-v8';
+const CACHE = 'car-viewer-v9';
 const SHELL = [
   '.',
   'index.html',
@@ -12,8 +12,19 @@ const SHELL = [
   'hdr/studio_small_09.hdr',
 ];
 
+// 녹음한 목소리 파일은 있는 것만 미리 받아 둔다 (없는 파일 때문에 설치가 실패하면 안 되므로 하나씩 try)
+const SOUND_IDS = ['wrangler4d', 'wrangler23', 'wrangler', 'gladiator', 'gclass25', 'gclass', 'defenderpickup', 'defender', 'bronco', 'hummerh3', 'supersafari'];
+const SOUND_EXTS = ['webm', 'm4a', 'mp3'];
+
 self.addEventListener('install', (e) => {
-  e.waitUntil(caches.open(CACHE).then((c) => c.addAll(SHELL)));
+  e.waitUntil(
+    caches.open(CACHE).then(async (c) => {
+      await c.addAll(SHELL);
+      for (const id of SOUND_IDS) for (const kind of ['intro', 'go']) for (const ext of SOUND_EXTS) {
+        await c.add(`sounds/${id}-${kind}.${ext}`).catch(() => {});
+      }
+    })
+  );
   self.skipWaiting();
 });
 
