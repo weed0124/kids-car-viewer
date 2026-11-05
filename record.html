@@ -31,7 +31,7 @@
 <body>
   <h1>🎙️ 목소리 녹음</h1>
   <p class="help">
-    차마다 두 줄(설명, 출발)을 읽어서 녹음합니다. 🔴 누르고 읽은 뒤 ⏹, ▶로 들어보고, 괜찮으면 저장.
+    차마다 설명 한 줄을 읽어서 녹음합니다. 🔴 누르고 읽은 뒤 ⏹, ▶로 들어보고, 괜찮으면 저장.
     다 끝나면 맨 위 "전부 저장"을 누르면 파일들이 내려받아집니다. 그 파일들을 <b>sounds/</b> 폴더에 넣으면 끝.
     조용한 곳에서, 마이크에서 한 뼘쯤 떨어져 또박또박 읽으면 제일 잘 들려요.
   </p>
@@ -47,7 +47,7 @@
     const saveAllBtn = document.getElementById('save-all');
     const micState = document.getElementById('mic-state');
     const errBox = document.getElementById('err');
-    const KINDS = [['intro', '📢 설명'], ['go', '🏁 출발']];
+    const KINDS = [['intro', '📢 설명']];
     const clips = new Map();   // "id-kind" -> { blob, ext }
     let stream = null;
     let recorder = null;

@@ -90,7 +90,6 @@ body { display: flex; flex-direction: column; }
   cursor: pointer;
   flex-shrink: 0;
 }
-.sound-btn.go { background: #ff5a5f; }
 .sound-btn:active { transform: scale(.94); }
 .sound-btn.playing { background: #ffb63d; color: #3a2800; animation: pulse .6s ease-in-out infinite alternate; }
 @keyframes pulse { from { transform: scale(1); } to { transform: scale(1.08); } }

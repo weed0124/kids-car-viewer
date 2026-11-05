@@ -5,8 +5,6 @@ const listPanel = document.getElementById('list-panel');
 const loadFill = document.getElementById('load-fill');
 const colorBar = document.getElementById('color-bar');
 const introBtn = document.getElementById('btn-intro');
-const goBtn = document.getElementById('btn-go');
-const hornBtn = document.getElementById('btn-horn');
 
 // 아이가 고를 수 있는 색 (버튼 순서대로)
 const PALETTE = [
@@ -117,25 +115,17 @@ function applyColor(colorId, save = true) {
   }
 }
 
-// ---- 소리 (세이펜처럼: 설명 / 출발 / 빵빵) ------------------------------------
-// 목소리: sounds/<id>-intro.*, sounds/<id>-go.* (record.html에서 직접 녹음해 저장한 파일. webm → m4a → mp3 순으로 찾음)
+// ---- 소리 (세이펜처럼: 설명해줘) ----------------------------------------------
+// 목소리: sounds/<id>-intro.* (record.html에서 직접 녹음해 저장한 파일. webm → m4a → mp3 순으로 찾음)
 // 파일이 하나도 없으면 브라우저 음성합성(speechSynthesis)이 models.json의 lines를 대신 읽어줌.
-// 경적은 Web Audio로 그 자리에서 합성 (models.json의 engine.horn 으로 음높이).
 
 const SOUND_EXTS = ['webm', 'm4a', 'mp3'];
-let audioCtx = null;
 let voice = null;          // 지금 재생 중인 <audio>
-
-function ctx() {
-  if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-  if (audioCtx.state === 'suspended') audioCtx.resume();
-  return audioCtx;
-}
 
 function stopAllSound() {
   if (voice) { voice.pause(); voice = null; }
   if (window.speechSynthesis) speechSynthesis.cancel();
-  for (const b of [introBtn, goBtn, hornBtn]) b.classList.remove('playing');
+  introBtn.classList.remove('playing');
 }
 
 function playVoice(kind, btn) {
@@ -163,36 +153,12 @@ function playVoice(kind, btn) {
   });
 }
 
-// 경적: 두 음을 같이 (차마다 음높이 조금 다르게)
-function honk(cfg) {
-  const c = ctx();
-  const f = (cfg && cfg.horn) || 420;
-  const t = c.currentTime;
-  const lp = c.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 1800; lp.connect(c.destination);
-  const master = c.createGain(); master.gain.value = 0; master.connect(lp);
-  const oscs = [f, f * 1.26].map((hz) => { const o = c.createOscillator(); o.type = 'sawtooth'; o.frequency.value = hz; const g = c.createGain(); g.gain.value = 0.25; o.connect(g); g.connect(master); return o; });
-  const beep = (at, len) => { master.gain.setTargetAtTime(0.5, at, 0.02); master.gain.setTargetAtTime(0, at + len, 0.05); };
-  beep(t, 0.22); beep(t + 0.35, 0.45);   // 빵, 빠앙
-  for (const o of oscs) { o.start(t); o.stop(t + 1.2); }
-  hornBtn.classList.add('playing');
-  setTimeout(() => hornBtn.classList.remove('playing'), 900);
-}
-
 async function speakIntro() {
   stopAllSound();
   await playVoice('intro', introBtn);
 }
 
-async function goGo() {
-  stopAllSound();
-  viewer.autoRotate = true;
-  rotateBtn.classList.add('on');
-  await playVoice('go', goBtn);
-}
-
 introBtn.addEventListener('click', speakIntro);
-goBtn.addEventListener('click', goGo);
-hornBtn.addEventListener('click', () => honk(cars[index].engine));
 
 // ---- 버튼들 ---------------------------------------------------------------
 

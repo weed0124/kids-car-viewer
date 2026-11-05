@@ -1,4 +1,4 @@
-const CACHE = 'car-viewer-v9';
+const CACHE = 'car-viewer-v10';
 const SHELL = [
   '.',
   'index.html',
@@ -20,8 +20,8 @@ self.addEventListener('install', (e) => {
   e.waitUntil(
     caches.open(CACHE).then(async (c) => {
       await c.addAll(SHELL);
-      for (const id of SOUND_IDS) for (const kind of ['intro', 'go']) for (const ext of SOUND_EXTS) {
-        await c.add(`sounds/${id}-${kind}.${ext}`).catch(() => {});
+      for (const id of SOUND_IDS) for (const ext of SOUND_EXTS) {
+        await c.add(`sounds/${id}-intro.${ext}`).catch(() => {});
       }
     })
   );
