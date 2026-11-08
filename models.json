@@ -47,7 +47,7 @@
       "paint": [
         "Jeep_GladiatorRewardRecycled_2019Paint_Material"
       ],
-      "note": "2020 Jeep Gladiator by Ddiaz Design (Sketchfab, CC BY-NC-SA) — 보조바퀴는 짐칸 아래",
+      "note": "2020 Jeep Gladiator by Ddiaz Design (Sketchfab, CC BY-NC-SA), 보조바퀴는 짐칸 아래",
       "lines": {
         "intro": "지프 글래디에이터! 랭글러에 짐칸이 달린 픽업트럭이에요. 자전거도, 캠핑 짐도 뒤에 실을 수 있어요!"
       }
@@ -176,7 +176,8 @@
       "emoji": "🚚",
       "file": "models/zetros.glb",
       "paint": [
-        "carp"
+        "Color_1",
+        "material"
       ],
       "note": "2009 Mercedes-Benz Zetros 1833 4x4 by Ddiaz Design (Sketchfab, CC BY-NC-SA)",
       "lines": {

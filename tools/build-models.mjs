@@ -24,7 +24,7 @@ const CFG = {
   santafe:    { in: `${S}/santafe/scene.gltf`,   paint: ['santafek_body'], target: 220000, error: 0.01 },
   sorento:    { in: `${S}/sorento/scene.gltf`,   paint: ['template_carpaint.014'], target: 220000, error: 0.01, renormal: true },
   // round 3 (2026-11-05)
-  zetros:     { in: `${S}/zetros.glb`,     paint: ['carp'] },
+  zetros:     { in: `${S}/zetros.glb`,     paint: ['Color_1', 'material'] },
   g4x4:       { in: `${S}/g4x4.glb`,       paint: ['CarPaint'] },
   hummerev:   { in: `${S}/hummerev.glb`,   paint: ['CarPaint'], target: 250000, error: 0.01, renormal: true },
   lc250:      { in: `${S}/lc250.glb`,      paint: ['CarPaint'], target: 250000, error: 0.02, renormal: true },

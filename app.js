@@ -17,8 +17,9 @@ const PALETTE = [
   { id: 'purple', name: '보라', rgb: [0.45, 0.15, 0.70] },
   { id: 'pink',   name: '분홍', rgb: [0.95, 0.50, 0.70] },
   { id: 'brown',  name: '갈색', rgb: [0.32, 0.17, 0.08] },
-  { id: 'white',  name: '하양', rgb: [0.92, 0.92, 0.92] },
-  { id: 'silver', name: '은색', rgb: [0.55, 0.57, 0.60] },
+  // 흰색은 금속 반사를 끄고(금속성 도장 차에서 회색으로 보이는 문제), 은색은 금속 느낌을 살려 확실히 구분되게 함
+  { id: 'white',  name: '하양', rgb: [0.95, 0.95, 0.95], metal: 0.0, rough: 0.3 },
+  { id: 'silver', name: '은색', rgb: [0.50, 0.52, 0.55], metal: 0.9, rough: 0.35 },
   { id: 'black',  name: '검정', rgb: [0.04, 0.04, 0.05] },
 ];
 
@@ -106,10 +107,14 @@ function currentPaintMaterials(car) {
   return viewer.model.materials.filter((m) => names.includes(m.name));
 }
 
-function originalColor(m, car) {
-  if (car.color) return [...car.color, 1];
-  if (!originalOf.has(m)) originalOf.set(m, [...m.pbrMetallicRoughness.baseColorFactor]);
-  return originalOf.get(m);
+// 재질의 원래 색, 금속성, 거칠기를 처음 봤을 때 기억해 둔다
+function original(m, car) {
+  if (!originalOf.has(m)) {
+    const pbr = m.pbrMetallicRoughness;
+    originalOf.set(m, { color: [...pbr.baseColorFactor], metal: pbr.metallicFactor, rough: pbr.roughnessFactor });
+  }
+  const o = originalOf.get(m);
+  return car.color ? { ...o, color: [...car.color, 1] } : o;
 }
 
 function markColor(colorId) {
@@ -121,9 +126,12 @@ function applyColor(colorId, save = true) {
   if (!car) return;
   const c = PALETTE.find((p) => p.id === colorId);
   for (const m of currentPaintMaterials(car)) {
-    const orig = originalColor(m, car);
-    const rgb = c ? c.rgb : orig;
-    m.pbrMetallicRoughness.setBaseColorFactor([rgb[0], rgb[1], rgb[2], orig[3] ?? 1]);
+    const o = original(m, car);
+    const pbr = m.pbrMetallicRoughness;
+    const rgb = c ? c.rgb : o.color;
+    pbr.setBaseColorFactor([rgb[0], rgb[1], rgb[2], o.color[3] ?? 1]);
+    pbr.setMetallicFactor(c && c.metal != null ? c.metal : o.metal);
+    pbr.setRoughnessFactor(c && c.rough != null ? c.rough : o.rough);
   }
   markColor(c ? c.id : '');
   if (save) {
