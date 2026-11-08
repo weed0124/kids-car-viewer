@@ -1,4 +1,4 @@
-const CACHE = 'car-viewer-v11';
+const CACHE = 'car-viewer-v12';
 const SHELL = [
   '.',
   'index.html',
