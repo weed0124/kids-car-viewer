@@ -65,6 +65,7 @@ python3 -m http.server 8787
      재질 이름은 `npx @gltf-transform/cli inspect 파일.glb` 의 MATERIALS 표에서 확인.
      보통 `carpaint`, `body`, `paint` 같은 이름이고, 헷갈리면 브라우저 콘솔에서
      `viewer.model.materials.map(m => m.name)` 로 이름을 보고 하나씩 칠해보면 됨.
+   - `group`: 목록에서 묶이는 분류. `spare`(뒤에 보조바퀴 달린 차) 또는 `truck`(픽업트럭·보조바퀴 없는 차). 제목은 `models.json` 맨 아래 `groups`에 있음.
    - `color`: (선택) 기본 색을 `[r, g, b]` (0~1)로 덮어쓰기. 텍스처가 입혀진 차체는 원래 색을 자동으로 못 읽을 때가 있어서 씀.
    - 주의: `optimize`의 기본값(`--palette`)은 재질들을 하나로 합쳐버려서 색 바꾸기가 안 됨. `--palette false` 를 붙일 것.
 5. 새로고침 끝. (오프라인 캐시가 남아있으면 `sw.js`의 `CACHE` 버전을 하나 올리면 확실히 갱신)
@@ -80,7 +81,7 @@ python3 -m http.server 8787
 3. 다 끝나면 **💾 전부 저장** (또는 각 줄의 저장). `wrangler-intro.webm` 같은 이름으로 내려받아집니다.
 4. 내려받은 파일을 전부 이 폴더의 `sounds/` 에 넣고 `sw.js`의 `CACHE` 버전을 하나 올린 뒤 커밋·push 하면 모든 기기에서 나옵니다.
 
-- 대사는 `models.json`의 `lines.intro`에 있습니다. 바꾸고 싶으면 거기서 고치면 녹음 페이지에도 그대로 뜹니다.
+- 대사와 파일 이름을 한눈에 보려면 `sounds/대본.md`를 여세요. 대사 원본은 `models.json`의 `lines.intro`에 있습니다. 바꾸고 싶으면 거기서 고치면 녹음 페이지에도 그대로 뜹니다.
 - 파일 이름 규칙: `sounds/<id>-intro.webm` (`webm` 대신 `m4a`, `mp3`도 됨. 폰 녹음 앱으로 따로 녹음해 넣어도 됨).
 - 녹음 파일이 없는 차는 브라우저 음성합성이 대사를 대신 읽어줍니다.
 - 새 차를 넣으면 `sw.js`의 `SOUND_IDS`에도 id를 추가해야 오프라인용으로 미리 받아집니다.

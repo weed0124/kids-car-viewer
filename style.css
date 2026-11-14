@@ -188,6 +188,17 @@ body { display: flex; flex-direction: column; }
   padding-bottom: 20px;
 }
 
+#car-list .group-title {
+  grid-column: 1 / -1;
+  font-size: 17px;
+  font-weight: 800;
+  color: #ffb63d;
+  padding: 10px 4px 2px;
+  border-bottom: 2px solid rgba(255,182,61,.35);
+  margin-bottom: 2px;
+}
+#car-list .group-title:not(:first-child) { margin-top: 10px; }
+
 #car-list button {
   width: 100%;
   border: none;

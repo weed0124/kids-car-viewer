@@ -11,7 +11,8 @@
       "note": "2013 Equipped Jeep Wrangler Unlimited Rubicon by Ddiaz Design (Sketchfab, CC BY-NC-SA)",
       "lines": {
         "intro": "지프 랭글러, 문이 네 개인 랭글러예요! 가족이 다 같이 탈 수 있고, 지붕 위에는 짐이 가득 실려 있어요. 뒤에 달린 보조바퀴도 찾아보세요!"
-      }
+      },
+      "group": "spare"
     },
     {
       "id": "wrangler23",
@@ -24,7 +25,8 @@
       "note": "2023 Jeep Wrangler Rubicon 392 20th Anniversary by Ddiaz Design (Sketchfab, CC BY-NC-SA)",
       "lines": {
         "intro": "지프 랭글러 루비콘 392! 아주 힘센 엔진이 들어 있어서 큰 바위도 쑥쑥 넘어가요. 파란색 차체가 정말 멋지죠?"
-      }
+      },
+      "group": "spare"
     },
     {
       "id": "wrangler",
@@ -37,20 +39,8 @@
       "note": "2007 Jeep Wrangler Rubicon by Ddiaz Design (Sketchfab, CC BY-NC-SA)",
       "lines": {
         "intro": "지프 랭글러, 문이 두 개인 빨간 랭글러예요! 동그란 헤드라이트가 꼭 눈처럼 생겼죠? 뒤에는 보조바퀴가 붙어 있어요."
-      }
-    },
-    {
-      "id": "gladiator",
-      "name": "지프 글래디에이터",
-      "emoji": "🛻",
-      "file": "models/gladiator.glb",
-      "paint": [
-        "Jeep_GladiatorRewardRecycled_2019Paint_Material"
-      ],
-      "note": "2020 Jeep Gladiator by Ddiaz Design (Sketchfab, CC BY-NC-SA), 보조바퀴는 짐칸 아래",
-      "lines": {
-        "intro": "지프 글래디에이터! 랭글러에 짐칸이 달린 픽업트럭이에요. 자전거도, 캠핑 짐도 뒤에 실을 수 있어요!"
-      }
+      },
+      "group": "spare"
     },
     {
       "id": "gclass25",
@@ -63,7 +53,8 @@
       "note": "2025 Mercedes-Benz G-Class AMG G 63 by Ddiaz Design (Sketchfab, CC BY-NC-SA)",
       "lines": {
         "intro": "벤츠 G63! 네모반듯한 모양이 멋진 차예요. 아주 빠르고 튼튼해서 어디든 갈 수 있어요. 뒤에 동그란 보조바퀴가 보이나요?"
-      }
+      },
+      "group": "spare"
     },
     {
       "id": "gclass",
@@ -76,7 +67,8 @@
       "note": "2020 Mercedes-Benz G-Class AMG G63 by Ddiaz Design (Sketchfab, CC BY-NC-SA)",
       "lines": {
         "intro": "벤츠 G바겐! 사십 년 넘게 똑같은 네모 모양을 지켜온 차예요. 문을 닫으면 철컥! 하고 아주 묵직한 소리가 나요."
-      }
+      },
+      "group": "spare"
     },
     {
       "id": "g4x4",
@@ -89,7 +81,8 @@
       "note": "2015 Mercedes-Benz G500 4x4² Concept by Ddiaz Design (Sketchfab, CC BY-NC-SA)",
       "lines": {
         "intro": "벤츠 G500 4x4 스퀘어드! 바퀴가 엄청나게 커서 G바겐 중에서도 키가 제일 커요. 형광 노란색이 멀리서도 눈에 확 띄죠? 뒤에 보조바퀴도 달려 있어요."
-      }
+      },
+      "group": "spare"
     },
     {
       "id": "hummerev",
@@ -102,7 +95,8 @@
       "note": "2024 GMC Hummer EV SUV by Ddiaz Design (Sketchfab, CC BY-NC-SA)",
       "lines": {
         "intro": "GMC 허머 EV! 기름 대신 전기로 달리는 커다란 허머예요. 바퀴 네 개가 다 꺾여서 게처럼 옆으로도 갈 수 있어요. 뒤에 보조바퀴가 붙어 있어요!"
-      }
+      },
+      "group": "spare"
     },
     {
       "id": "defenderpickup",
@@ -115,7 +109,8 @@
       "note": "Land Rover Defender 110 Double Cab Pick Up by Ddiaz Design (Sketchfab, CC BY)",
       "lines": {
         "intro": "랜드로버 디펜더 픽업! 농장에서도, 산에서도 씩씩하게 일하는 차예요. 뒤에 넓은 짐칸이 있어요."
-      }
+      },
+      "group": "spare"
     },
     {
       "id": "defender",
@@ -129,7 +124,8 @@
       "note": "1997 Land Rover Defender 90 (Sketchfab)",
       "lines": {
         "intro": "랜드로버 디펜더 90! 영국에서 온 튼튼한 차예요. 진흙길도, 강물도 문제없이 건너요. 뒤에 보조바퀴가 달려 있어요!"
-      }
+      },
+      "group": "spare"
     },
     {
       "id": "bronco",
@@ -142,7 +138,8 @@
       "note": "2021 Ford Bronco 2-door by Ddiaz Design (Sketchfab, CC BY-NC-SA)",
       "lines": {
         "intro": "포드 브롱코! 브롱코는 야생마라는 뜻이에요. 지붕을 떼어내면 하늘이 보여요. 커다란 바퀴로 모래밭도 달려요!"
-      }
+      },
+      "group": "spare"
     },
     {
       "id": "hummerh3",
@@ -155,7 +152,8 @@
       "note": "Hummer H3 by David_Holiday (Sketchfab, CC BY)",
       "lines": {
         "intro": "허머 H3! 군인 아저씨들이 타던 차에서 태어난 차예요. 커다란 바퀴와 네모난 몸이 정말 튼튼해 보이죠?"
-      }
+      },
+      "group": "spare"
     },
     {
       "id": "supersafari",
@@ -168,7 +166,22 @@
       "note": "Nissan Super Safari SDC PERFORMANCE by Lambo_SC04 (Sketchfab, CC BY)",
       "lines": {
         "intro": "닛산 패트롤 슈퍼 사파리! 사막의 모래 언덕을 신나게 오르내리는 차예요. 까만 차체에 주황색 줄무늬가 멋져요!"
-      }
+      },
+      "group": "spare"
+    },
+    {
+      "id": "gladiator",
+      "name": "지프 글래디에이터",
+      "emoji": "🛻",
+      "file": "models/gladiator.glb",
+      "paint": [
+        "Jeep_GladiatorRewardRecycled_2019Paint_Material"
+      ],
+      "note": "2020 Jeep Gladiator by Ddiaz Design (Sketchfab, CC BY-NC-SA), 보조바퀴는 짐칸 아래",
+      "lines": {
+        "intro": "지프 글래디에이터! 랭글러에 짐칸이 달린 픽업트럭이에요. 자전거도, 캠핑 짐도 뒤에 실을 수 있어요!"
+      },
+      "group": "truck"
     },
     {
       "id": "zetros",
@@ -182,7 +195,8 @@
       "note": "2009 Mercedes-Benz Zetros 1833 4x4 by Ddiaz Design (Sketchfab, CC BY-NC-SA)",
       "lines": {
         "intro": "벤츠 제트로스! 사막과 산을 넘어 탐험을 떠나는 커다란 트럭이에요. 뒤 짐칸에 기름통과 텐트를 싣고 아주 멀리까지 갈 수 있어요."
-      }
+      },
+      "group": "truck"
     },
     {
       "id": "lc250",
@@ -195,7 +209,8 @@
       "note": "2025 Toyota Land Cruiser 250 by Ddiaz Design (Sketchfab, CC BY-NC-SA)",
       "lines": {
         "intro": "토요타 랜드크루저 250! 네모난 눈을 가진 새 랜드크루저예요. 전 세계 어디든, 사막이든 눈길이든 끝까지 달리는 튼튼한 차예요."
-      }
+      },
+      "group": "truck"
     },
     {
       "id": "ramtrx",
@@ -208,7 +223,8 @@
       "note": "2021 Ram 1500 TRX by Ddiaz Design (Sketchfab, CC BY-NC-SA)",
       "lines": {
         "intro": "램 1500 TRX! 티라노사우루스처럼 힘이 센 픽업트럭이에요. 보닛에 커다란 구멍으로 바람을 들이마시면서 쌩쌩 달려요."
-      }
+      },
+      "group": "truck"
     },
     {
       "id": "raptor",
@@ -221,7 +237,18 @@
       "note": "2024 Ford F-150 Raptor R by Ddiaz Design (Sketchfab, CC BY-NC-SA)",
       "lines": {
         "intro": "포드 F-150 랩터! 랩터는 무서운 공룡 이름이에요. 사막을 점프하면서 달려도 끄떡없는 커다란 픽업트럭이에요."
-      }
+      },
+      "group": "truck"
+    }
+  ],
+  "groups": [
+    {
+      "id": "spare",
+      "title": "🛞 뒤에 보조바퀴 달린 차"
+    },
+    {
+      "id": "truck",
+      "title": "🛻 픽업트럭 · 보조바퀴 없는 차"
     }
   ]
 }

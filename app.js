@@ -24,6 +24,7 @@ const PALETTE = [
 ];
 
 let cars = [];
+let groups = [];
 let index = 0;
 const originalOf = new WeakMap(); // 재질 → 처음 봤을 때의 원래 색 (원래 색으로 되돌리기용)
 
@@ -31,7 +32,9 @@ const savedIndex = Number(localStorage.getItem('carIndex') || 0);
 
 async function init() {
   const res = await fetch('models.json');
-  cars = (await res.json()).cars;
+  const data = await res.json();
+  cars = data.cars;
+  groups = data.groups || [{ id: '', title: '' }];
   index = savedIndex < cars.length ? savedIndex : 0;
   buildList();
   buildColorBar();
@@ -50,24 +53,36 @@ function show(i, speak = false) {
   if (viewer.src !== car.file) viewer.src = car.file;
   else markColor(localStorage.getItem(`color:${car.id}`) || '');
   localStorage.setItem('carIndex', String(index));
-  for (const [j, btn] of [...carList.children].entries()) {
-    btn.firstChild.classList.toggle('current', j === index);
+  for (const btn of carList.querySelectorAll('button[data-index]')) {
+    btn.classList.toggle('current', Number(btn.dataset.index) === index);
   }
 }
 
 function buildList() {
   carList.innerHTML = '';
-  cars.forEach((car, i) => {
-    const li = document.createElement('li');
-    const btn = document.createElement('button');
-    btn.innerHTML = `<span class="emoji">${car.emoji}</span>${car.name}`;
-    btn.addEventListener('click', () => {
-      show(i, true);
-      listPanel.classList.add('hidden');
-    });
-    li.appendChild(btn);
-    carList.appendChild(li);
-  });
+  // 그룹(보조바퀴 있는 차 / 픽업트럭)별로 제목을 넣고 그 아래 차 버튼을 나열
+  for (const g of groups) {
+    const members = cars.map((car, i) => [car, i]).filter(([car]) => (car.group || '') === g.id);
+    if (!members.length) continue;
+    if (g.title) {
+      const h = document.createElement('li');
+      h.className = 'group-title';
+      h.textContent = g.title;
+      carList.appendChild(h);
+    }
+    for (const [car, i] of members) {
+      const li = document.createElement('li');
+      const btn = document.createElement('button');
+      btn.dataset.index = String(i);
+      btn.innerHTML = `<span class="emoji">${car.emoji}</span>${car.name}`;
+      btn.addEventListener('click', () => {
+        show(i, true);
+        listPanel.classList.add('hidden');
+      });
+      li.appendChild(btn);
+      carList.appendChild(li);
+    }
+  }
 }
 
 // ---- 색 바꾸기 -------------------------------------------------------------
