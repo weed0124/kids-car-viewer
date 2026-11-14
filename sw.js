@@ -1,4 +1,4 @@
-const CACHE = 'car-viewer-v13';
+const CACHE = 'car-viewer-v14';
 const SHELL = [
   '.',
   'index.html',
@@ -9,6 +9,7 @@ const SHELL = [
   'vendor/model-viewer.min.js',
   'icons/icon-192.png',
   'icons/icon-512.png',
+  'icons/apple-touch-icon.png',
   'hdr/studio_small_09.hdr',
 ];
 
